@@ -1,0 +1,34 @@
+$( document ).ready(function() {
+
+    $('.tabbable a[href^="#c"], .accordion a[href^="#c"]').each(function(){
+
+        $(this).click(function(event) {
+            event.preventDefault();
+
+            var cId = $(this).attr('href');
+
+            // open tabs
+            $(cId).parents('.tab-pane').each(function(){
+                if($(this).length){
+                    $('a[href="#'+ $(this).attr('id') +'"]').tab('show');
+                }
+            });
+
+            // open accordions
+            $(cId).parents('.collapse').each(function(){
+                if($(this).length){
+                    $(this).collapse('show');
+                }
+            });
+
+            $('html, body').stop().animate({
+                'scrollTop': $(cId).offset().top - $("#nav-primary").height() - 48
+            }, 700, 'swing', function () {
+                $(cId + ' img').addClass('shadow-pulse');
+                $(cId + ' img').on('animationend', function(){
+                    $(cId + ' img').removeClass('shadow-pulse');
+                });
+            });
+        });
+    });
+});

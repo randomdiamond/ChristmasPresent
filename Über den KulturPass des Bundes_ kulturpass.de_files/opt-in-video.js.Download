@@ -1,0 +1,25 @@
+$(document).ready(function () {
+    $('.opt-in-btn').on("click", function (e) {
+        e.preventDefault();
+
+        var targetIframe = $(this).closest('.opt-in-frame-wrapper').find('iframe');
+        var targetIframeSrc = targetIframe.attr('data-src');
+
+        targetIframe.removeAttr('data-src');
+        targetIframe.attr('src', targetIframeSrc);
+
+        $(this).closest('.opt-in-overlay-wrapper').animate(
+            {"opacity": "0"},
+            {
+                duration: 1000, easing: 'linear',
+                complete: function () {
+                    $(this).css('display', 'none');
+                    targetIframe.animate(
+                        {"opacity": "1"},
+                        {duration: 500, easing: 'linear'}
+                    );
+                }
+            }
+        );
+    });
+});

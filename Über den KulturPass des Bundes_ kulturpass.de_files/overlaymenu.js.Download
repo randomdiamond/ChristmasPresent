@@ -1,0 +1,7 @@
+$( document ).ready(function() {
+    $('[href="#overlaymenu"]').on('click', function(e){
+        e.preventDefault();
+        var overlayMenu = $('#overlaymenu');
+        overlayMenu.hasClass('active') ? overlayMenu.removeClass('active') : overlayMenu.addClass('active');
+    });
+});
